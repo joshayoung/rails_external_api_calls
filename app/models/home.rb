@@ -1,7 +1,7 @@
 class Home < ApplicationRecord
   class << self
-    def net_http
-        uri = URI.parse("https://api.adviceslip.com/advice")
+    def net_http(url = "https://api.adviceslip.com/advice/1")
+        uri = URI.parse(url)
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -10,8 +10,8 @@ class Home < ApplicationRecord
         response.body
     end
 
-      def http_party
-          HTTParty.get("https://api.adviceslip.com/advice").response.body
+      def http_party(url = "https://api.adviceslip.com/advice")
+          HTTParty.get(url).response.body
       end
     end
 end
